@@ -26,12 +26,13 @@ const Tree = (arr) => {
     return root
   }
 
-  const root = buildTree(arrUniqueSorted)
+  let root = buildTree(arrUniqueSorted)
 
   const getRoot = () => root
 
   const insertNode = (root, value) => {
     if (!root.left && !root.right) return insert(root, value)
+
     if (value < root.data) return insertNode(root.left, value)
 
     if (value > root.data) return insertNode(root.right, value)
@@ -49,15 +50,36 @@ const Tree = (arr) => {
     if (node.data === root.data) return null
   }
 
-  // Compare the value:
-  // if less then root go left
-  // if more go right
-  // stop when arrive to leaf
-  // if the value is less then leaf create a node and insert in the leaf
-  // if value is greater create a node and insert in the leaf
-  // stop the operation if value is equal to any node
+  // TODO> delete method
 
-  const deleteNode = (value) => {}
+  // const removeNode = (root, value) => {
+  //   root = remove(root, value)
+  // }
+
+  // const remove = (root, value) => {
+  //   if (!root) return root
+
+  //   if (value < root.data) return (root.left = remove(root.left, value))
+
+  //   if (value > root.data) return (root.right = remove(root.right, value))
+
+  //   if (!root.left && !root.right) return null
+
+  //   if (!root.left) return root.right
+
+  //   if (!root.right) return root.left
+
+  //   root.data = min(root.right)
+
+  //   root.right = remove(root.right, root.data)
+
+  //   return root
+  // }
+  // const min = (root) => {
+  //   if (!root.left) return root.data
+
+  //   return min(root.left)
+  // }
 
   const prettyPrint = (node, prefix = '', isLeft = true) => {
     if (!node) return null
@@ -73,6 +95,7 @@ const Tree = (arr) => {
 
   return {
     insertNode,
+    removeNode,
     getRoot,
     prettyPrint
   }
@@ -85,4 +108,8 @@ bts.prettyPrint(bts.getRoot())
 bts.insertNode(bts.getRoot(), 100)
 bts.prettyPrint(bts.getRoot())
 bts.insertNode(bts.getRoot(), 2)
+bts.prettyPrint(bts.getRoot())
+bts.insertNode(bts.getRoot(), 6345)
+bts.prettyPrint(bts.getRoot())
+bts.insertNode(bts.getRoot(), 7)
 bts.prettyPrint(bts.getRoot())
