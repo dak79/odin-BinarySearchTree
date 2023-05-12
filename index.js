@@ -14,6 +14,16 @@ const Node = (data = null, left = null, right = null) => {
 const Tree = (arr) => {
   const arrUniqueSorted = mergeSort([...new Set(arr)])
 
+  /**
+   * buildTree.
+   * From a sorted array of unique values build a tree
+   *
+   * @param {[]} array
+   * @param {Number} start - Index
+   * @param {Number} end - Index
+   *
+   *
+   */
   const buildTree = (array, start = 0, end = array.length - 1) => {
     if (start > end) return null
 
@@ -28,12 +38,27 @@ const Tree = (arr) => {
 
   let root = buildTree(arrUniqueSorted)
 
+  /**
+   * getRoot.
+   * Get the level - 0 root value
+   */
   const getRoot = () => root
 
+  /**
+   * insertNode.
+   * Insert a node in the tree
+   * @param {} value
+   */
   const insertNode = (value) => {
     root = insert(root, value)
   }
 
+  /**
+   * insert.
+   * Recursive search and inserion of the Node in a leaf
+   * @param {Node} root
+   * @param {} value
+   */
   const insert = (root = root, value) => {
     if (!root) return (root = Node(value))
 
@@ -44,10 +69,24 @@ const Tree = (arr) => {
     return root
   }
 
+  /**
+   * removeNode.
+   * Remove a node from the tree
+   * @param {} value
+   */
   const removeNode = (value) => {
     root = remove(root, value)
   }
 
+  /**
+   * remove.
+   * Search for the Node with the value to remove and remove it when:
+   *    - is a leaf
+   *    - has only a child (left or right)
+   *    - has two children
+   * @param {Node} root
+   * @param {} value
+   */
   const remove = (root, value) => {
     if (!root) return root
     if (value < root.data) root.left = remove(root.left, value)
@@ -63,12 +102,25 @@ const Tree = (arr) => {
     return root
   }
 
+  /**
+   * min.
+   * Find a min Node value from a given root
+   * @param {Node} root
+   */
   const min = (root) => {
     if (!root.left) return root.data
 
     return min(root.left)
   }
 
+  /**
+   * prettyPrint.
+   * Print the tree
+   * This function was given from The Odin Project. Thanks guys :)
+   * @param {Node} node
+   * @param {String} prefix
+   * @param {Boolean} isLeft
+   */
   const prettyPrint = (node, prefix = '', isLeft = true) => {
     if (!node) return null
 
