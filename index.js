@@ -14,7 +14,7 @@ const Node = (data = null, left = null, right = null) => {
 const Tree = (arr) => {
   const arrUniqueSorted = mergeSort([...new Set(arr)])
 
-  const buildTree = (array, start = 0, end = array.length) => {
+  const buildTree = (array, start = 0, end = array.length - 1) => {
     if (start > end) return null
 
     const mid = parseInt((start + end) / 2)
@@ -30,56 +30,44 @@ const Tree = (arr) => {
 
   const getRoot = () => root
 
-  const insertNode = (root, value) => {
-    if (!root.left && !root.right) return insert(root, value)
-
-    if (value < root.data) return insertNode(root.left, value)
-
-    if (value > root.data) return insertNode(root.right, value)
-
-    if (value === root.data) return null
+  const insertNode = (value) => {
+    root = insert(root, value)
   }
 
-  const insert = (root, value) => {
-    const node = Node(value)
+  const insert = (root = root, value) => {
+    if (!root) return (root = Node(value))
 
-    if (node.data < root.data) return (root.left = node)
+    if (value < root.data) root.left = insert(root.left, value)
 
-    if (node.data > root.data) return (root.right = node)
+    if (value > root.data) root.right = insert(root.right, value)
 
-    if (node.data === root.data) return null
+    return root
   }
 
-  // TODO> delete method
+  const removeNode = (value) => {
+    root = remove(root, value)
+  }
 
-  // const removeNode = (root, value) => {
-  //   root = remove(root, value)
-  // }
+  const remove = (root, value) => {
+    if (!root) return root
+    if (value < root.data) root.left = remove(root.left, value)
+    if (value > root.data) root.right = remove(root.right, value)
+    if (value === root.data) {
+      if (!root.left) return root.right
+      if (!root.right) return root.left
 
-  // const remove = (root, value) => {
-  //   if (!root) return root
+      root.data = min(root.right)
+      root.right = remove(root.right, root.data)
+    }
 
-  //   if (value < root.data) return (root.left = remove(root.left, value))
+    return root
+  }
 
-  //   if (value > root.data) return (root.right = remove(root.right, value))
+  const min = (root) => {
+    if (!root.left) return root.data
 
-  //   if (!root.left && !root.right) return null
-
-  //   if (!root.left) return root.right
-
-  //   if (!root.right) return root.left
-
-  //   root.data = min(root.right)
-
-  //   root.right = remove(root.right, root.data)
-
-  //   return root
-  // }
-  // const min = (root) => {
-  //   if (!root.left) return root.data
-
-  //   return min(root.left)
-  // }
+    return min(root.left)
+  }
 
   const prettyPrint = (node, prefix = '', isLeft = true) => {
     if (!node) return null
@@ -104,12 +92,19 @@ const Tree = (arr) => {
 const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 
 const bts = Tree(arr)
+console.log(`Tree builded from array: ${arr}`)
 bts.prettyPrint(bts.getRoot())
-bts.insertNode(bts.getRoot(), 100)
+console.log(`Inseriton of 100, 0, 40, 10, 7 (dupl.), 6`)
+bts.insertNode(100)
+bts.insertNode(0)
+bts.insertNode(40)
+bts.insertNode(10)
+bts.insertNode(7)
+bts.insertNode(6)
 bts.prettyPrint(bts.getRoot())
-bts.insertNode(bts.getRoot(), 2)
-bts.prettyPrint(bts.getRoot())
-bts.insertNode(bts.getRoot(), 6345)
-bts.prettyPrint(bts.getRoot())
-bts.insertNode(bts.getRoot(), 7)
+console.log(`Remove of 0, 7, 23, 15(not exist)`)
+bts.removeNode(0)
+bts.removeNode(7)
+bts.removeNode(23)
+bts.removeNode(15)
 bts.prettyPrint(bts.getRoot())
