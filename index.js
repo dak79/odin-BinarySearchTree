@@ -1,5 +1,57 @@
 /**
  * Binary Search Tree
+ *
+ * TODO:
+ *
+ *  - Write a levelOrder function which accepts another function as a parameter.
+ *    levelOrder should traverse the tree in breadth-first level order and
+ *    provide each node as the argument to the provided function. This function
+ *    can be implemented using either iteration or recursion (try implementing
+ *    both!). The method should return an array of values if no function is
+ *    given.
+ *
+ *    Tip: You will want to use an array acting as a queue to keep track of all
+ *    the child nodes that you have yet to traverse and to add new ones to the
+ *    list (as you saw in the video).
+ *
+ *  - Write inorder, preorder, and postorder functions that accept a function
+ *    parameter. Each of these functions should traverse the tree in their
+ *    respective depth-first order and yield each node to the provided function
+ *    given as an argument. The functions should return an array of values if
+ *    no function is given.
+ *
+ *  - Write a height function which accepts a node and returns its height.
+ *    Height is defined as the number of edges in longest path from a given
+ *    node to a leaf node.
+ *
+ *  - Write a depth function which accepts a node and returns its depth. Depth
+ *    is defined as the number of edges in path from a given node to the tree’s
+ *    root node.
+ *
+ *  - Write a isBalanced function which checks if the tree is balanced. A
+ *    balanced tree is one where the difference between heights of left subtree
+ *    and right subtree of every node is not more than 1.
+ *
+ *  - Write a rebalance function which rebalances an unbalanced tree.
+ *    Tip: You’ll want to use a traversal method to provide a new array to
+ *    the buildTree function.
+ *
+ *-----------------------------------------------------------------------------
+ *
+ * Tie it all together.
+ * Write a simple driver script that does the following:
+ *  - Create a binary search tree from an array of random numbers. You can
+ *    create a function that returns an array of random numbers every time
+ *    you call it, if you wish.
+ *  - Confirm that the tree is balanced by calling isBalanced.
+ *
+ *  - Print out all elements in level, pre, post, and in order.
+ *
+ *  - Unbalance the tree by adding several numbers > 100.
+ *  - Confirm that the tree is unbalanced by calling isBalanced.
+ *  - Balance the tree by calling rebalance.
+ *  - Confirm that the tree is balanced by calling isBalanced
+ *  - Print out all elements in level, pre, post, and in order
  */
 import { mergeSort } from './sort.js'
 
@@ -11,7 +63,7 @@ const Node = (data = null, left = null, right = null) => {
   }
 }
 
-const Tree = (arr) => {
+export const Tree = (arr) => {
   const arrUniqueSorted = mergeSort([...new Set(arr)])
 
   /**
@@ -49,9 +101,7 @@ const Tree = (arr) => {
    * Insert a node in the tree
    * @param {} value
    */
-  const insertNode = (value) => {
-    root = insert(root, value)
-  }
+  const insertNode = (value) => (root = insert(root, value))
 
   /**
    * insert.
@@ -74,9 +124,7 @@ const Tree = (arr) => {
    * Remove a node from the tree
    * @param {} value
    */
-  const removeNode = (value) => {
-    root = remove(root, value)
-  }
+  const removeNode = (value) => (root = remove(root, value))
 
   /**
    * remove.
@@ -113,6 +161,28 @@ const Tree = (arr) => {
     return min(root.left)
   }
 
+  /* TODO: - Write a find function which accepts a value and returns the node with the
+   *         given value.
+   */
+  /**
+   * findNode.
+   * Find the node with given value, if none returns null
+   * @param {} value
+   */
+  const findNode = (value) => find(root, value)
+
+  /**
+   * find.
+   * Traverse the tree and return a node with given value if exist.
+   * @param {Node} root
+   * @param {} value
+   */
+  const find = (root, value) => {
+    if (!root || root.data === value) return root
+    if (value < root.data) return find(root.left, value)
+    if (value > root.data) return find(root.right, value)
+  }
+
   /**
    * prettyPrint.
    * Print the tree
@@ -136,27 +206,8 @@ const Tree = (arr) => {
   return {
     insertNode,
     removeNode,
+    findNode,
     getRoot,
     prettyPrint
   }
 }
-
-const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-
-const bts = Tree(arr)
-console.log(`Tree builded from array: ${arr}`)
-bts.prettyPrint(bts.getRoot())
-console.log(`Inseriton of 100, 0, 40, 10, 7 (dupl.), 6`)
-bts.insertNode(100)
-bts.insertNode(0)
-bts.insertNode(40)
-bts.insertNode(10)
-bts.insertNode(7)
-bts.insertNode(6)
-bts.prettyPrint(bts.getRoot())
-console.log(`Remove of 0, 7, 23, 15(not exist)`)
-bts.removeNode(0)
-bts.removeNode(7)
-bts.removeNode(23)
-bts.removeNode(15)
-bts.prettyPrint(bts.getRoot())
