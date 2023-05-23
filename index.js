@@ -3,16 +3,6 @@
  *
  * TODO:
  *
- *  - Write a levelOrder function which accepts another function as a parameter.
- *    levelOrder should traverse the tree in breadth-first level order and
- *    provide each node as the argument to the provided function. This function
- *    can be implemented using either iteration or recursion (try implementing
- *    both!). The method should return an array of values if no function is
- *    given.
- *
- *    Tip: You will want to use an array acting as a queue to keep track of all
- *    the child nodes that you have yet to traverse and to add new ones to the
- *    list (as you saw in the video).
  *
  *  - Write inorder, preorder, and postorder functions that accept a function
  *    parameter. Each of these functions should traverse the tree in their
@@ -54,6 +44,7 @@
  *  - Print out all elements in level, pre, post, and in order
  */
 import { mergeSort } from './sort.js'
+import { Queque } from './queque.js'
 
 const Node = (data = null, left = null, right = null) => {
   return {
@@ -161,9 +152,6 @@ export const Tree = (arr) => {
     return min(root.left)
   }
 
-  /* TODO: - Write a find function which accepts a value and returns the node with the
-   *         given value.
-   */
   /**
    * findNode.
    * Find the node with given value, if none returns null
@@ -181,6 +169,36 @@ export const Tree = (arr) => {
     if (!root || root.data === value) return root
     if (value < root.data) return find(root.left, value)
     if (value > root.data) return find(root.right, value)
+  }
+
+  /*  TODO:
+   *  - Write a levelOrder function which accepts another function as a parameter.
+   *    levelOrder should traverse the tree in breadth-first level order and
+   *    provide each node as the argument to the provided function. This function
+   *    can be implemented using either iteration or recursion (try implementing
+   *    both!). The method should return an array of values if no function is
+   *    given.
+   *
+   *    Tip: You will want to use an array acting as a queue to keep track of all
+   *    the child nodes that you have yet to traverse and to add new ones to the
+   *    list (as you saw in the video).
+   */
+
+  const levelOrder = (root) => {
+    if (!root) return null
+    const queque = Queque()
+    let order = '|'
+    queque.enqueque(root)
+
+    while (!queque.isEmpty()) {
+      let curr = queque.peek()
+      order += ` ${curr.data} |`
+      if (curr.left) queque.enqueque(curr.left)
+      if (curr.right) queque.enqueque(curr.right)
+      queque.dequeque()
+    }
+
+    return order
   }
 
   /**
@@ -207,6 +225,7 @@ export const Tree = (arr) => {
     insertNode,
     removeNode,
     findNode,
+    levelOrder,
     getRoot,
     prettyPrint
   }
