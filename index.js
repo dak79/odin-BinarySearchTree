@@ -3,7 +3,6 @@
  *
  * TODO:
  *
- *
  *  - Write inorder, preorder, and postorder functions that accept a function
  *    parameter. Each of these functions should traverse the tree in their
  *    respective depth-first order and yield each node to the provided function
@@ -170,19 +169,6 @@ export const Tree = (arr) => {
     if (value < root.data) return find(root.left, value)
     if (value > root.data) return find(root.right, value)
   }
-
-  /*  TODO:
-   *  - Write a levelOrder function which accepts another function as a parameter.
-   *    levelOrder should traverse the tree in breadth-first level order and
-   *    provide each node as the argument to the provided function. This function
-   *    can be implemented using either iteration or recursion (try implementing
-   *    both!). The method should return an array of values if no function is
-   *    given.
-   *
-   *    Tip: You will want to use an array acting as a queue to keep track of all
-   *    the child nodes that you have yet to traverse and to add new ones to the
-   *    list (as you saw in the video).
-   */
 
   const levelOrder = (root) => {
     if (!root) return null
