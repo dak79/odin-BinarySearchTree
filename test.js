@@ -45,3 +45,18 @@ console.log(bts.levelOrder(bts.getRoot()))
 console.log(
   '-----------------------------------------------------------------------------------------'
 )
+console.log('Depth-first-traversal (DFT) - Preorder: ')
+console.log(bts.preorder(bts.getRoot()))
+console.log(
+  '-----------------------------------------------------------------------------------------'
+)
+console.log('Depth-first-traversal (DFT) - Inorder: ')
+console.log(bts.inorder(bts.getRoot()))
+console.log(
+  '-----------------------------------------------------------------------------------------'
+)
+console.log('Depth-first-traversal (DFT) - Postorder: ')
+console.log(bts.postorder(bts.getRoot()))
+console.log(
+  '-----------------------------------------------------------------------------------------'
+)

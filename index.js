@@ -3,11 +3,6 @@
  *
  * TODO:
  *
- *  - Write inorder, preorder, and postorder functions that accept a function
- *    parameter. Each of these functions should traverse the tree in their
- *    respective depth-first order and yield each node to the provided function
- *    given as an argument. The functions should return an array of values if
- *    no function is given.
  *
  *  - Write a height function which accepts a node and returns its height.
  *    Height is defined as the number of edges in longest path from a given
@@ -170,19 +165,71 @@ export const Tree = (arr) => {
     if (value > root.data) return find(root.right, value)
   }
 
-  const levelOrder = (root) => {
+  /**
+   * levelOrder.
+   * Breadh-first traversal
+   * @param {} root
+   */
+  const levelOrder = (root, order = []) => {
     if (!root) return null
     const queque = Queque()
-    let order = '|'
     queque.enqueque(root)
 
     while (!queque.isEmpty()) {
       let curr = queque.peek()
-      order += ` ${curr.data} |`
+      order.push(curr.data)
       if (curr.left) queque.enqueque(curr.left)
       if (curr.right) queque.enqueque(curr.right)
       queque.dequeque()
     }
+
+    return order
+  }
+
+  /**
+   * preorder.
+   * Depth-first traversal (DFT) - Preorder
+   *
+   * @param {Node} root
+   * @param {[]} order
+   */
+  const preorder = (root, order = []) => {
+    if (!root) return null
+    order.push(root.data)
+    if (root.left) preorder(root.left, order)
+    if (root.right) preorder(root.right, order)
+
+    return order
+  }
+
+  /**
+   * inorder.
+   * Depth-first traversal (DFT) - Inorder
+   *
+   * @param {Node} root
+   * @param {[]} order
+   */
+  const inorder = (root, order = []) => {
+    if (!root) return null
+    if (root.left) inorder(root.left, order)
+    order.push(root.data)
+    if (root.right) inorder(root.right, order)
+
+    return order
+  }
+
+  /**
+   * postorder.
+   * Depth-first traversal (DFT) - Postorder
+   *
+   * @param {Node} root
+   * @param {[]} order
+   */
+  const postorder = (root, order = []) => {
+    if (!root) return null
+    if (root.left) postorder(root.left, order)
+    if (root.right) postorder(root.right, order)
+    order.push(root.data)
 
     return order
   }
@@ -212,6 +259,9 @@ export const Tree = (arr) => {
     removeNode,
     findNode,
     levelOrder,
+    preorder,
+    inorder,
+    postorder,
     getRoot,
     prettyPrint
   }
