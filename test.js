@@ -60,3 +60,23 @@ console.log(bts.postorder(bts.getRoot()))
 console.log(
   '-----------------------------------------------------------------------------------------'
 )
+console.log('Height')
+console.log(`Height of root: ${bts.height(bts.getRoot())}`)
+console.log(`Height of node 4: ${bts.height(bts.findNode(4))}`)
+console.log(`Height of node 67: ${bts.height(bts.findNode(67))}`)
+console.log(`Height of node 1: ${bts.height(bts.findNode(1))}`)
+console.log(`Height of node 324: ${bts.height(bts.findNode(324))}`)
+console.log(`Height of node 10: ${bts.height(bts.findNode(10))}`)
+console.log(
+  '-----------------------------------------------------------------------------------------'
+)
+console.log('Depth')
+console.log(`Depth of root: ${bts.depth(bts.getRoot())}`)
+console.log(`Depth of node 4: ${bts.depth(bts.findNode(4))}`)
+console.log(`Depth of node 67: ${bts.depth(bts.findNode(67))}`)
+console.log(`Depth of node 1: ${bts.depth(bts.findNode(1))}`)
+console.log(`Depth of node 324: ${bts.depth(bts.findNode(324))}`)
+console.log(`Depth of node 10: ${bts.depth(bts.findNode(10))}`)
+console.log(
+  '-----------------------------------------------------------------------------------------'
+)

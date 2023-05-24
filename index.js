@@ -4,13 +4,7 @@
  * TODO:
  *
  *
- *  - Write a height function which accepts a node and returns its height.
- *    Height is defined as the number of edges in longest path from a given
- *    node to a leaf node.
  *
- *  - Write a depth function which accepts a node and returns its depth. Depth
- *    is defined as the number of edges in path from a given node to the tree’s
- *    root node.
  *
  *  - Write a isBalanced function which checks if the tree is balanced. A
  *    balanced tree is one where the difference between heights of left subtree
@@ -234,6 +228,44 @@ export const Tree = (arr) => {
     return order
   }
 
+  /*  TODO:
+   *  - Write a height function which accepts a node and returns its height
+   *    Height is defined as the number of edges in longest path from a given
+   *    node to a leaf node.
+   *
+   */
+
+  /**
+   * height.
+   * Height is defined as the number of edges in longest path from a given
+   * node to a leaf node.
+   *
+   * @param {Node} root
+   */
+  const height = (root) => {
+    if (!root || (!root.left && !root.right)) return 0
+
+    return 1 + Math.max(height(root.left), height(root.right))
+  }
+
+  /**
+   * depth.
+   * Depth is defined as the number of edges in path from a given node to the tree’s
+   * root node.
+   *
+   * @param {Node} node
+   * @param {Node} root
+   * @param {Number} d
+   */
+  const depth = (node, root = getRoot(), d = 0) => {
+    if (!root || !node) return 0
+    if (node.data === root.data) return d
+
+    return node.data < root.data
+      ? depth(node, root.left, (d += 1))
+      : depth(node, root.right, (d += 1))
+  }
+
   /**
    * prettyPrint.
    * Print the tree
@@ -262,6 +294,8 @@ export const Tree = (arr) => {
     preorder,
     inorder,
     postorder,
+    height,
+    depth,
     getRoot,
     prettyPrint
   }
