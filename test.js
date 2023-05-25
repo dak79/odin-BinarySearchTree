@@ -1,12 +1,16 @@
 import { Tree } from './index.js'
 const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-
 const bts = Tree(arr)
 console.log(
   '-----------------------------------------------------------------------------------------'
 )
 console.log(`Tree builded from array: ${arr}`)
 bts.prettyPrint(bts.getRoot())
+console.log(
+  '-----------------------------------------------------------------------------------------'
+)
+console.log('Balanced')
+console.log(`Tree is balanced? ${bts.isBalanced()}`)
 console.log(
   '-----------------------------------------------------------------------------------------'
 )
@@ -17,7 +21,18 @@ bts.insertNode(40)
 bts.insertNode(10)
 bts.insertNode(7)
 bts.insertNode(6)
+bts.insertNode(-16)
+bts.insertNode(-1)
+bts.insertNode(-10)
+bts.insertNode(-8)
+bts.insertNode(-6)
+bts.insertNode(-7)
 bts.prettyPrint(bts.getRoot())
+console.log(
+  '-----------------------------------------------------------------------------------------'
+)
+console.log('Balanced')
+console.log(`Tree is balanced? ${bts.isBalanced()}`)
 console.log(
   '-----------------------------------------------------------------------------------------'
 )
@@ -27,6 +42,11 @@ bts.removeNode(7)
 bts.removeNode(23)
 bts.removeNode(15)
 bts.prettyPrint(bts.getRoot())
+console.log(
+  '-----------------------------------------------------------------------------------------'
+)
+console.log('Balanced')
+console.log(`Tree is balanced? ${bts.isBalanced()}`)
 console.log(
   '-----------------------------------------------------------------------------------------'
 )
@@ -77,6 +97,22 @@ console.log(`Depth of node 67: ${bts.depth(bts.findNode(67))}`)
 console.log(`Depth of node 1: ${bts.depth(bts.findNode(1))}`)
 console.log(`Depth of node 324: ${bts.depth(bts.findNode(324))}`)
 console.log(`Depth of node 10: ${bts.depth(bts.findNode(10))}`)
+console.log(
+  '-----------------------------------------------------------------------------------------'
+)
+console.log('Balanced')
+console.log(`Tree is balanced? ${bts.isBalanced()}`)
+console.log(
+  '-----------------------------------------------------------------------------------------'
+)
+console.log('Unbalanced tree')
+bts.prettyPrint(bts.getRoot())
+console.log(
+  '-----------------------------------------------------------------------------------------'
+)
+console.log('Re-balanced tree')
+bts.rebalance()
+bts.prettyPrint(bts.getRoot())
 console.log(
   '-----------------------------------------------------------------------------------------'
 )
