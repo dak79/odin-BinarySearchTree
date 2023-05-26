@@ -8,7 +8,9 @@ readable, code.
 
 ## Technologies
 
-JavaScript, npm, git.
+- JavaScript
+- Npm
+- Git
 
 ## Assignment
 
